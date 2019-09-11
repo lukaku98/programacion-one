@@ -1,56 +1,44 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
+
 
 int main()
 {
-
     char nombre[20];
-    char sexo;
-    char nombreMin[20];
-    char nombreMax[20];
-    char sexoMin;
-    char sexoMax;
-    char seguir;
-    int nota;
-    int notaMaxima;
-    int notaMinima;
-    int contMujeres=0;
-    int contador=0;
-    int acumNotas=0;
-    int acumNotasf=0;
-    int flag=0;
-    float promedio;
-    float promedioF;
+    char apellido[20];
+    char nombreCompleto[41];
+    char auxCad[100];
+    int i=0;
 
-    do{
-            printf("ingrese nombre: ");
-    gets(nombre);
-    printf("ingrese sexo f/m: ");
+    printf("ingrese nombre: ");
     fflush(stdin);
-    scanf("%c,&sexo");
+    gets(auxCad);
 
-    while(sexo!='f'&&sexo!='m')
-    {
-        printf("error ingrese sexo _F/M");
+    while(strlen(auxCad)>19){
+        printf("Error. ingrese nombre: ");
         fflush(stdin);
-        scanf("%c",&sexo);
-    }
-    printf("ingrese nota 0-10: ");
-    scanf("%d",&nota);
-    while(nota<0||nota>10)
-    {
-        printf("error ingrese nota 0-10:");
-        fflush(stdin);
-        scanf("&d",&nota);
+        gets(auxCad);
 
     }
+    strcpy(apellido, auxCad);
 
-        printf("\n Quiere continuar?:");
-        fflush(stdin);
-        //scanf("%c",&seguir);
-        seguir=getche();
-    }while(seguir=='s');
+    strcpy(nombreCompleto,apellido);
+    strcat(nombreCompleto,",");
+    strcat(nombreCompleto,nombre);
 
+    strlwr(nombreCompleto);
 
+    nombreCompleto[0]= toupper(nombreCompleto[0]);
+
+    while(nombreCompleto[i]!= '\0'){
+        if(nombreCompleto[i]==' '){
+            nombreCompleto[i+1]= toupper(nombreCompleto[i+1]);
+        }
+        i++;
+    }
+
+    printf("%s",nombreCompleto);
     return 0;
 }
